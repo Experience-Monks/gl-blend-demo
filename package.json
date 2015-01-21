@@ -1,0 +1,37 @@
+{
+  "name": "gl-blend-demo",
+  "version": "1.0.0",
+  "description": "an example scene which blends foreground and background images",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Matt DesLauriers",
+    "email": "dave.des@gmail.com",
+    "url": "https://github.com/mattdesl"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "ecosystem:stackgl",
+    "stack.gl",
+    "stackgl",
+    "blend",
+    "blending",
+    "glsl",
+    "photoshop",
+    "test",
+    "example",
+    "demo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Jam3/gl-blend-demo.git"
+  },
+  "homepage": "https://github.com/Jam3/gl-blend-demo",
+  "bugs": {
+    "url": "https://github.com/Jam3/gl-blend-demo/issues"
+  }
+}

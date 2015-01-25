@@ -4,6 +4,7 @@ var xtend = require('xtend')
 
 module.exports = function create(opt) {
     var texture = require('baboon-image').transpose(1, 0, 2)
+    var texture2 = require('lena').transpose(1, 0, 2)
 
     //default to texture size
     opt = xtend({
@@ -17,11 +18,15 @@ module.exports = function create(opt) {
 
     //our foreground, use a test texture for now
     var tex1 = Texture(gl, texture)
-    //our background, another test texture
-    var tex0 = require('gl-checker-texture')(gl, { colors: [
-        [0x50,0x50,0x50,0xff],
-        [0x46,0x46,0x46,0xff]
-    ]})
+    var tex0 = Texture(gl, texture2)
+
+    // could also use a repeating checker like so:
+    // var tex0 = require('gl-checker-texture')(gl, { colors: [
+    //     [0x50,0x50,0x50,0xff],
+    //     [0x46,0x46,0x46,0xff]
+    // ]})
+    
+    gl.disable(gl.DEPTH_TEST)
 
     //draw it to the canvas
     render(gl)

@@ -12,8 +12,8 @@
   "dependencies": {
     "a-big-triangle": "^1.0.0",
     "baboon-image": "^1.0.0",
-    "gl-checker-texture": "^1.0.0",
     "gl-texture2d": "^2.0.8",
+    "lena": "^1.0.0",
     "webgl-context": "^2.1.1",
     "xtend": "^4.0.0"
   },

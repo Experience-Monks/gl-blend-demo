@@ -17,9 +17,11 @@
     "webgl-context": "^2.1.1",
     "xtend": "^4.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "standard": "^3.3.2"
+  },
   "scripts": {
-    "test": "node test.js"
+    "test": "standard"
   },
   "keywords": [
     "ecosystem:stackgl",

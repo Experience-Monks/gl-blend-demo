@@ -8,16 +8,28 @@ A demo to visualize different blend modes. Takes in a shader and context attribu
 
 [![NPM](https://nodei.co/npm/gl-blend-demo.png)](https://www.npmjs.com/package/gl-blend-demo)
 
-#### `gl = example(opt)`
+#### `demo = require('gl-blend-demo')(opt)`
 
 Build an example where `opt` can be:
 
 - options for [webgl-context](https://github.com/mattdesl/webgl-context) (width, height, etc)
 - `shader` which can be a function to create a shader (taking `gl` as first parameter) or a `gl-shader` object
 
-Returns the GL context, which might then be added to document.body.
-
 The canvas width and height defaults to the test texture size (512x512).
+
+#### `demo.render()`
+
+Re-renders the demo with the current shader.
+
+#### `demo.shader`
+
+The shader to use while rendering.
+
+#### `demo.canvas`
+
+A reference to the canvas, which can be appended to the document body.
+
+#### 
 
 ## Contributing
 

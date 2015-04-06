@@ -2,51 +2,50 @@ var Texture = require('gl-texture2d')
 var triangle = require('a-big-triangle')
 var xtend = require('xtend')
 
-var BlendDemo = function(opt) {
-    var texture = require('baboon-image').transpose(1, 0, 2)
-    var texture2 = require('lena').transpose(1, 0, 2)
+module.exports = function createDemo (opt) {
+  var texture = require('baboon-image').transpose(1, 0, 2)
+  var texture2 = require('lena').transpose(1, 0, 2)
 
-    //default to texture size
-    opt = xtend({
-        width: texture.shape[0],
-        height: texture.shape[1]
-    }, opt)
+  // default to texture size
+  opt = xtend({
+    width: texture.shape[0],
+    height: texture.shape[1]
+  }, opt)
 
-    //setup context & textures
-    var gl = this.gl = require('webgl-context')(opt)
-    this.shader = typeof opt.shader === 'function' ? opt.shader(gl) : opt.shader
+  // setup context & textures
+  var gl = require('webgl-context')(opt)
+  var shader = typeof opt.shader === 'function' ? opt.shader(gl) : opt.shader
 
-    //our foreground, use a test texture for now
-    this.tex1 = Texture(gl, texture)
-    this.tex0 = Texture(gl, texture2)
+  // expose an API
+  var demo = {
+    gl: gl,
+    canvas: gl.canvas,
+    shader: shader,
+    render: render
+  }
 
-    //expose canvas
-    this.canvas = gl.canvas
+  // test textures for now to blend with
+  var tex1 = Texture(gl, texture)
+  var tex0 = Texture(gl, texture2)
 
-    this.gl.disable(gl.DEPTH_TEST)
+  // draw it to the canvas
+  render()
+  return demo
 
-    //draw it to the canvas
-    this.render()
-}
+  function render () {
+    var gl = demo.gl
+    var shader = demo.shader
 
-BlendDemo.prototype = {
-    render: function() {
-        var gl = this.gl
+    gl.disable(gl.DEPTH_TEST)
+    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight)
 
-        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight)
+    shader.bind()
+    shader.uniforms.background = 0
+    shader.uniforms.foreground = 1
 
-        this.shader.bind()
-        this.shader.uniforms.background = 0
-        this.shader.uniforms.foreground = 1
+    tex1.bind(1)
+    tex0.bind(0)
 
-        this.tex1.bind(1)
-        this.tex0.bind(0)
-
-        triangle(gl)
-    }
-}
-
-module.exports = function(opt) {
-    var blendDemo = new BlendDemo(opt)
-    return blendDemo
+    triangle(gl)
+  }
 }
